@@ -70,6 +70,12 @@ public class playTicTacToe {
         int rowInt = -1;
         System.out.println("Please input your move. Ex: A 1");
         input = kb.nextLine();
+
+
+        while (input.length() != 3) {
+            System.out.println("Please enter a valid position.");
+            input = kb.nextLine().toUpperCase();
+        }
         colChar = input.substring(0,1).toUpperCase().charAt(0);
         rowChar = input.substring(2).charAt(0);
         switch (colChar) {
@@ -79,19 +85,21 @@ public class playTicTacToe {
                 break;
             case 'C': colInt = 2;
                 break;
-            }
+        }
         switch (rowChar) {
             case '1': rowInt = 0;
                 break;
             case '2': rowInt = 1;
-                    break;
+                break;
             case '3': rowInt = 2;
                 break;
-        }       
+        }
         boolean valid = true;
-        if (board[rowInt][colInt] != '-' || !(colChar >= 101 || colChar <= 103) || !(rowChar >=1 || rowChar <= 3) || input.length() != 3)
-            valid = false;
-        while (!valid) {
+        if (!(colChar >= 65 || colChar <= 90) || !(rowChar >=1 || rowChar <= 3)) {
+            valid = false; 
+            //System.out.println("statement entered.");
+        }
+        while (!valid || board[rowInt][colInt] != '-' ) {
             System.out.println("Please enter a valid position.");
             input = kb.nextLine();
             colChar = input.substring(0,1).toUpperCase().charAt(0);
